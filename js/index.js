@@ -1,23 +1,31 @@
 class PasswordGenerator {
   constructor() {}
 
-  
+  // method to generate random passwords
   generateRandomPassword(passwordLength) {
+    /*  
+      add characters you wish on ASCII base string variable.  
+      The password charaters will extract to this ASCII base.
+    */
 
-    var randomPassword = "";
-    var alphanumericBaseString =
+    var asciiBaseString =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefABCDEF01234567!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-    var alphaBaseStringLength = alphanumericBaseString.length;
+    var randomPassword = "";
+    var asciiBaseStringLength = asciiBaseString.length;
 
     for (var i = 0; i < passwordLength; i++) {
+      /*
+        A random character on ASCII base string is selected and
+        used to compose the random password 
+      */
       randomPassword =
         randomPassword +
-        alphanumericBaseString.charAt(
-          Math.floor(Math.random() * alphaBaseStringLength)
+        asciiBaseString.charAt(
+          Math.floor(Math.random() * asciiBaseStringLength)
         );
     }
 
-    alert("Password generated: "+randomPassword);
+    alert("Generated password: " + randomPassword);
   }
 }
 
