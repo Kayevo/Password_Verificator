@@ -1,7 +1,19 @@
-.card {
+.cardPasswordGeneration {
   text-align: center;
   background-color: rgb(102, 209, 173);
   padding: 5%;
-  margin: 10%;
+  margin: 2%;
   font-family: Arial, Helvetica, sans-serif;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.cardPasswordVerification {
+  text-align: center;
+  background-color: rgb(102, 209, 173);
+  padding: 5%;
+  margin: 2%;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 20%;
+  margin-right: 20%;
 }

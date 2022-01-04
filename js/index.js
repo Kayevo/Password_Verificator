@@ -27,6 +27,12 @@ class PasswordGenerator {
 
     alert("Generated password: " + randomPassword);
   }
+
+  // method to verify strong's passwords
+  verifyStrongSPassword() {
+    const password = document.querySelector("#password").value;
+    alert(password);
+  }
 }
 
 var passwordGenerator = new PasswordGenerator();

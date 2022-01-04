@@ -8,13 +8,27 @@
 
     <link rel="stylesheet" href="css/style.css" />
 
-    <script src="js/index.js"></script>
+    <script src="js/index.js" defer></script>
   </head>
   <body>
-    <div class="card">
-      <h1>Generate your own password</h1>
-      <h1>and verify your stronger password</h1>
-      <button onclick="passwordGenerator.generateRandomPassword(8)">Generate</button>
+    <div class="cardPasswordGeneration">
+      <h5>Generate your own password</h5>
+      <button onclick="passwordGenerator.generateRandomPassword(8)">
+        Generate
+      </button>
+    </div>
+    <div class="cardPasswordGeneration">
+      <h5>Verify your stronger password</h5>
+      <form action="">
+        <input
+          type="text"
+          name="password"
+          id="password"
+          placeholder="Text a password"
+        />
+        <button type="submit" value="Verify password" id="send" onclick="passwordGenerator.verifyStrongSPassword()">Verify password</button>
+        <!-- <input type="submit" value="Verify password" id="send" onclick="verifyStrongSPassword.verifyStrongSPassword()"/> -->
+      </form>
     </div>
   </body>
 </html>
