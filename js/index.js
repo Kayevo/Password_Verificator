@@ -1,5 +1,25 @@
 class PasswordGenerator {
-  constructor() {}
+  constructor() {
+    window.specialCharactersBase = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+    window.asciiBaseString =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefABCDEF01234567!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+  }
+
+  isThereSpecialCharacters(password) {
+    var passwordLength = password.length;
+    var specialCharactersBaseLength = specialCharactersBase.length;
+    var thereIsSpecialCharacters = false;
+
+    for (var i = 0; i < passwordLength; i++) {
+      for (var j = 0; j < specialCharactersBaseLength; j++) {
+        if (password.charAt(i) == specialCharactersBase.charAt(j)) {
+          thereIsSpecialCharacters = true;
+        }
+      }
+    }
+
+    return thereIsSpecialCharacters;
+  }
 
   // method to generate random passwords
   generateRandomPassword(passwordLength) {
@@ -8,8 +28,6 @@ class PasswordGenerator {
       The password charaters will extract to this ASCII base.
     */
 
-    var asciiBaseString =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefABCDEF01234567!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     var randomPassword = "";
     var asciiBaseStringLength = asciiBaseString.length;
 
@@ -31,7 +49,11 @@ class PasswordGenerator {
   // method to verify strong's passwords
   verifyStrongSPassword() {
     const password = document.querySelector("#password").value;
-    alert(password);
+    var thereIsSpecialCharacters = false;
+
+    thereIsSpecialCharacters = this.isThereSpecialCharacters(password);
+
+    alert("Is there character: "+thereIsSpecialCharacters);
   }
 }
 
