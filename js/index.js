@@ -53,7 +53,7 @@ class PasswordGenerator {
 
     thereIsSpecialCharacters = this.isThereSpecialCharacters(password);
 
-    alert("Is there character: "+thereIsSpecialCharacters);
+    alert("Is there special character: "+thereIsSpecialCharacters);
   }
 }
 
