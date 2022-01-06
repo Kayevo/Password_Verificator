@@ -12,27 +12,27 @@
   </head>
   <body>
     <div class="cardPasswordGeneration">
-      <h5>Generate your own password</h5>
+      <h5>Generate a strong password</h5>
       <button onclick="passwordGenerator.generateRandomPassword(8)">
         Generate
       </button>
     </div>
     <div class="cardPasswordVerification">
-      <h5>Verify your stronger password</h5>
+      <h5>Verify your password strength</h5>
       <form action="">
         <input
           type="text"
           name="password"
           id="password"
-          placeholder="Text a password"
-        />
+          placeholder="Text password"
+        /></p>
         <button
           type="submit"
-          value="Verify password"
+          value="Verify"
           id="send"
           onclick="passwordGenerator.verifyStrongSPassword()"
         >
-          Verify password
+          Verify
         </button>
       </form>
     </div>

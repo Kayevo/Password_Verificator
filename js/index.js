@@ -1,35 +1,70 @@
 class PasswordGenerator {
   constructor() {
-    window.specialCharactersBase = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-    window.asciiBaseString =
+    window.specialCharBase = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+    window.asciiCharBase =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefABCDEF01234567!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+    window.numericCharBase = "0123456789";
+    window.uppercaseCharBase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    window.lowercaseCharBase = "abcdefghijklmnopqrstuvwxyz";
   }
 
-  isThereSpecialCharacters(password) {
+  thereIsUppercaseCharacters(password) {
     var passwordLength = password.length;
-    var specialCharactersBaseLength = specialCharactersBase.length;
-    var thereIsSpecialCharacters = false;
+    var uppercaseCharLength = uppercaseCharBase.length;
+    var thereIsUppercaseChar = false;
 
     for (var i = 0; i < passwordLength; i++) {
-      for (var j = 0; j < specialCharactersBaseLength; j++) {
-        if (password.charAt(i) == specialCharactersBase.charAt(j)) {
-          thereIsSpecialCharacters = true;
+      for (var j = 0; j < uppercaseCharLength; j++) {
+        if (password.charAt(i) == uppercaseCharBase.charAt(j)) {
+          thereIsUppercaseChar = true;
         }
       }
     }
 
-    return thereIsSpecialCharacters;
+    return thereIsUppercaseChar;
+  }
+
+  thereIsNumericCharacters(password) {
+    var passwordLength = password.length;
+    var numericCharBaseLength = numericCharBase.length;
+    var thereIsNumericChar = false;
+
+    for (var i = 0; i < passwordLength; i++) {
+      for (var j = 0; j < numericCharBaseLength; j++) {
+        if (password.charAt(i) == numericCharBase.charAt(j)) {
+          thereIsNumericChar = true;
+        }
+      }
+    }
+
+    return thereIsNumericChar;
+  }
+
+  thereIsSpecialCharacters(password) {
+    var passwordLength = password.length;
+    var specialCharBaseLength = specialCharBase.length;
+    var thereIsSpecialChar = false;
+
+    for (var i = 0; i < passwordLength; i++) {
+      for (var j = 0; j < specialCharBaseLength; j++) {
+        if (password.charAt(i) == specialCharBase.charAt(j)) {
+          thereIsSpecialChar = true;
+        }
+      }
+    }
+
+    return thereIsSpecialChar;
   }
 
   // method to generate random passwords
   generateRandomPassword(passwordLength) {
     /*  
-      add characters you wish on ASCII base string variable.  
+      add Char you wish on ASCII base string variable.  
       The password charaters will extract to this ASCII base.
     */
 
     var randomPassword = "";
-    var asciiBaseStringLength = asciiBaseString.length;
+    var asciiCharBaseLength = asciiCharBase.length;
 
     for (var i = 0; i < passwordLength; i++) {
       /*
@@ -38,8 +73,8 @@ class PasswordGenerator {
       */
       randomPassword =
         randomPassword +
-        asciiBaseString.charAt(
-          Math.floor(Math.random() * asciiBaseStringLength)
+        asciiCharBase.charAt(
+          Math.floor(Math.random() * asciiCharBaseLength)
         );
     }
 
@@ -49,11 +84,24 @@ class PasswordGenerator {
   // method to verify strong's passwords
   verifyStrongSPassword() {
     const password = document.querySelector("#password").value;
-    var thereIsSpecialCharacters = false;
+    var thereIsSpecialChar = false;
+    var thereIsNumericChar = false;
+    var thereIsUppercaseChar = false;
 
-    thereIsSpecialCharacters = this.isThereSpecialCharacters(password);
+    thereIsSpecialChar = this.thereIsSpecialCharacters(password);
+    thereIsNumericChar = this.thereIsNumericCharacters(password);
+    thereIsUppercaseChar = this.thereIsUppercaseCharacters(password);
 
-    alert("Is there special character: "+thereIsSpecialCharacters);
+    alert(
+      "There is special characters: " +
+        thereIsSpecialChar +
+        "\n" +
+        "There is numeric characters: " +
+        thereIsNumericChar +
+        "\n" +
+        "There is uppercase characters: " +
+        thereIsUppercaseChar
+    );
   }
 }
 
