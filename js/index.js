@@ -2,10 +2,43 @@ class PasswordGenerator {
   constructor() {
     window.specialCharBase = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     window.asciiCharBase =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefABCDEF01234567!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     window.numericCharBase = "0123456789";
     window.uppercaseCharBase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     window.lowercaseCharBase = "abcdefghijklmnopqrstuvwxyz";
+    window.whiteSpaceChar = " ";
+  }
+
+  thereIsWhiteSpaceCharacters(password) {
+    var passwordLength = password.length;
+    var whiteSpaceCharLength = whiteSpaceChar.length;
+    var thereIsWhiteSpaceChar = false;
+
+    for (let i = 0; i < passwordLength; i++) {
+      for (let j = 0; j < whiteSpaceCharLength; j++) {
+        if (password.charAt(i) == whiteSpaceChar.charAt(j)) {
+          thereIsWhiteSpaceChar = true;
+        }
+      }
+    }
+
+    return thereIsWhiteSpaceChar;
+  }
+
+  thereIsLowercaseCharacters(password) {
+    var passwordLength = password.length;
+    var lowercaseCharLength = lowercaseCharBase.length;
+    var thereIsLowercaseChar = false;
+
+    for (let i = 0; i < passwordLength; i++) {
+      for (let j = 0; j < lowercaseCharLength; j++) {
+        if (password.charAt(i) == lowercaseCharBase.charAt(j)) {
+          thereIsLowercaseChar = true;
+        }
+      }
+    }
+
+    return thereIsLowercaseChar;
   }
 
   thereIsUppercaseCharacters(password) {
@@ -13,8 +46,8 @@ class PasswordGenerator {
     var uppercaseCharLength = uppercaseCharBase.length;
     var thereIsUppercaseChar = false;
 
-    for (var i = 0; i < passwordLength; i++) {
-      for (var j = 0; j < uppercaseCharLength; j++) {
+    for (let i = 0; i < passwordLength; i++) {
+      for (let j = 0; j < uppercaseCharLength; j++) {
         if (password.charAt(i) == uppercaseCharBase.charAt(j)) {
           thereIsUppercaseChar = true;
         }
@@ -29,8 +62,8 @@ class PasswordGenerator {
     var numericCharBaseLength = numericCharBase.length;
     var thereIsNumericChar = false;
 
-    for (var i = 0; i < passwordLength; i++) {
-      for (var j = 0; j < numericCharBaseLength; j++) {
+    for (let i = 0; i < passwordLength; i++) {
+      for (let j = 0; j < numericCharBaseLength; j++) {
         if (password.charAt(i) == numericCharBase.charAt(j)) {
           thereIsNumericChar = true;
         }
@@ -45,8 +78,8 @@ class PasswordGenerator {
     var specialCharBaseLength = specialCharBase.length;
     var thereIsSpecialChar = false;
 
-    for (var i = 0; i < passwordLength; i++) {
-      for (var j = 0; j < specialCharBaseLength; j++) {
+    for (let i = 0; i < passwordLength; i++) {
+      for (let j = 0; j < specialCharBaseLength; j++) {
         if (password.charAt(i) == specialCharBase.charAt(j)) {
           thereIsSpecialChar = true;
         }
@@ -66,16 +99,14 @@ class PasswordGenerator {
     var randomPassword = "";
     var asciiCharBaseLength = asciiCharBase.length;
 
-    for (var i = 0; i < passwordLength; i++) {
+    for (let i = 0; i < passwordLength; i++) {
       /*
         A random character on ASCII base string is selected and
         used to compose the random password 
       */
       randomPassword =
         randomPassword +
-        asciiCharBase.charAt(
-          Math.floor(Math.random() * asciiCharBaseLength)
-        );
+        asciiCharBase.charAt(Math.floor(Math.random() * asciiCharBaseLength));
     }
 
     alert("Generated password: " + randomPassword);
@@ -87,10 +118,50 @@ class PasswordGenerator {
     var thereIsSpecialChar = false;
     var thereIsNumericChar = false;
     var thereIsUppercaseChar = false;
+    var thereIsLowercaseChar = false;
+    var thereIsWhiteSpaceChar = false;
+    var passwordIsStrong = true;
+    var passwordAdvices = new Array();
+    var passwordAdvicesPrintable = "";
 
     thereIsSpecialChar = this.thereIsSpecialCharacters(password);
     thereIsNumericChar = this.thereIsNumericCharacters(password);
     thereIsUppercaseChar = this.thereIsUppercaseCharacters(password);
+    thereIsLowercaseChar = this.thereIsLowercaseCharacters(password);
+    thereIsWhiteSpaceChar = this.thereIsWhiteSpaceCharacters(password);
+
+    if (!thereIsSpecialChar) {
+      passwordIsStrong = false;
+      passwordAdvices.push(
+        "Try complement your password with special characters."
+      );
+    }
+
+    if (!thereIsNumericChar) {
+      passwordIsStrong = false;
+      passwordAdvices.push(
+        "You should add some numbers on your secrect key word."
+      );
+    }
+
+    if (!thereIsUppercaseChar) {
+      passwordIsStrong = false;
+      passwordAdvices.push("Write uppercase letters on your password.");
+    }
+
+    if (!thereIsLowercaseChar) {
+      passwordIsStrong = false;
+      passwordAdvices.push(
+        "Insert on your key word a little bit lowercase characters."
+      );
+    }
+
+    if (thereIsWhiteSpaceChar) {
+      passwordIsStrong = false;
+      passwordAdvices.push(
+        "It's not a good idea use white spaces on any password."
+      );
+    }
 
     alert(
       "There is special characters: " +
@@ -100,8 +171,24 @@ class PasswordGenerator {
         thereIsNumericChar +
         "\n" +
         "There is uppercase characters: " +
-        thereIsUppercaseChar
+        thereIsUppercaseChar +
+        "\n" +
+        "There is lowercase characters: " +
+        thereIsLowercaseChar +
+        "\n" +
+        "There is white space characters: " +
+        thereIsWhiteSpaceChar +
+        "\n" +
+        "\n" +
+        "Password is strong: " +
+        passwordIsStrong
     );
+
+    for (let i in passwordAdvices) {
+      passwordAdvicesPrintable += "\n" + passwordAdvices[i];
+    }
+
+    alert(passwordAdvicesPrintable);
   }
 }
 
